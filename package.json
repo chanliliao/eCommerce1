@@ -1,0 +1,22 @@
+{
+  "name": "ecommercepaypal",
+  "version": "1.0.0",
+  "description": "eCommerce with paypal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chanliliao/eCommerce1.git"
+  },
+  "author": "Henry Liao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chanliliao/eCommerce1/issues"
+  },
+  "homepage": "https://github.com/chanliliao/eCommerce1#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
