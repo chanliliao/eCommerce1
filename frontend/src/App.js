@@ -5,21 +5,25 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import store from './store';
+import { Provider } from 'react-redux';
 
 const App = () => {
   return (
-    <Router>
-      <Fragment>
-        <Header />
-        <main className='py-3'>
-          <Container>
-            <Route path='/' component={HomeScreen} exact />
-            <Route path='/product/:id' component={ProductScreen} />
-          </Container>
-        </main>
-        <Footer />
-      </Fragment>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Header />
+          <main className='py-3'>
+            <Container>
+              <Route path='/' component={HomeScreen} exact />
+              <Route path='/product/:id' component={ProductScreen} />
+            </Container>
+          </main>
+          <Footer />
+        </Fragment>
+      </Router>
+    </Provider>
   );
 };
 
