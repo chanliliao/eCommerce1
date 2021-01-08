@@ -1,19 +1,15 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { Fragment, useEffect } from 'react';
 import Product from '../components/Product';
 import { Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { listProducts } from '../actions/productAction';
+import PropTypes from 'prop-types';
 
-const HomeScreen = () => {
-  const [products, setProducts] = useState([]);
-
+const HomeScreen = ({ products, listProducts }) => {
   useEffect(() => {
-    const fetchProducts = async () => {
-      const { data } = await axios.get('/api/products');
+    listProducts();
 
-      setProducts(data);
-    };
-
-    fetchProducts();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -30,4 +26,13 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+HomeScreen.propType = {
+  productList: PropTypes.func.isRequired,
+  products: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  product: state.product,
+});
+
+export default connect(mapStateToProps, { listProducts })(HomeScreen);
