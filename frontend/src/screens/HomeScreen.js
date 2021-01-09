@@ -5,12 +5,16 @@ import { connect } from 'react-redux';
 import { listProducts } from '../actions/productAction';
 import PropTypes from 'prop-types';
 
-const HomeScreen = ({ products, listProducts }) => {
+const HomeScreen = ({ listProducts, product: { products, loading } }) => {
   useEffect(() => {
     listProducts();
 
     // eslint-disable-next-line
   }, []);
+
+  if (loading || products === null) {
+    return <h3>Loading...</h3>;
+  }
 
   return (
     <Fragment>
@@ -32,7 +36,7 @@ HomeScreen.propType = {
 };
 
 const mapStateToProps = (state) => ({
-  product: state.product,
+  product: state.productList,
 });
 
 export default connect(mapStateToProps, { listProducts })(HomeScreen);

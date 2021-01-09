@@ -5,7 +5,7 @@ import {
 } from '../constants/productTypes';
 
 const initialState = {
-  products: [],
+  products: null,
   loading: false,
   error: null,
 };
@@ -13,7 +13,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case PRODUCT_LIST_REQUEST:
-      return { products: [], loading: true };
+      return { products: null, loading: true };
     case PRODUCT_LIST_SUCCESS:
       return {
         ...state,
