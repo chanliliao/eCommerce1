@@ -4,18 +4,17 @@ import { Link } from 'react-router-dom';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { getSingleProduct } from '../actions/productAction';
 import PropTypes from 'prop-types';
 
-const ProductScreen = ({ match }) => {
-  const dispatch = useDispatch();
-
-  const singleProduct = useSelector((state) => state.productList);
-  const { loading, error, product } = singleProduct;
-
+const ProductScreen = ({
+  match,
+  getSingleProduct,
+  singleProduct: { product, error, loading },
+}) => {
   useEffect(() => {
-    dispatch(getSingleProduct(match.params.id));
+    getSingleProduct(match.params.id);
   }, [match]);
 
   const {
@@ -89,4 +88,13 @@ const ProductScreen = ({ match }) => {
   );
 };
 
-export default ProductScreen;
+ProductScreen.propType = {
+  getSingleProduct: PropTypes.func.isRequired,
+  singleProduct: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  singleProduct: state.productList,
+});
+
+export default connect(mapStateToProps, { getSingleProduct })(ProductScreen);

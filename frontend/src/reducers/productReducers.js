@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
         loading: false,
       };
     case SINGLE_PRODUCT_REQUEST:
-      return { ...state, product: {}, loading: true };
+      return { product: {}, loading: true };
     case SINGLE_PRODUCT_SUCCESS:
       return {
         ...state,

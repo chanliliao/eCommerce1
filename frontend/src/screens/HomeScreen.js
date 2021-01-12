@@ -10,8 +10,6 @@ import PropTypes from 'prop-types';
 const HomeScreen = ({ listProducts, list: { products, loading, error } }) => {
   useEffect(() => {
     listProducts();
-
-    // eslint-disable-next-line
   }, []);
 
   return (
