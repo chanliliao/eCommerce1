@@ -93,6 +93,7 @@ const ProductScreen = ({
                       <Col>
                         <Form.Control
                           as='select'
+                          style={{ width: 'unset' }}
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
