@@ -27,6 +27,7 @@ export const listProducts = () => async (dispatch) => {
 };
 
 export const getSingleProduct = (id) => async (dispatch) => {
+  console.log(3);
   try {
     dispatch({ type: SINGLE_PRODUCT_REQUEST });
 

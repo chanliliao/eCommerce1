@@ -13,10 +13,14 @@ const ProductScreen = ({
   getSingleProduct,
   singleProduct: { product, error, loading },
 }) => {
+  console.log(1);
+
   useEffect(() => {
+    console.log(2);
     getSingleProduct(match.params.id);
   }, [match]);
-
+  console.log(4);
+  console.log(product);
   const {
     image,
     name,

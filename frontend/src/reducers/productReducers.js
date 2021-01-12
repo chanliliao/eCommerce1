@@ -19,7 +19,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case PRODUCT_LIST_REQUEST:
-      return { products: [], loading: true };
+      return { ...state, products: [], loading: true };
     case PRODUCT_LIST_SUCCESS:
       return {
         ...state,
@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
         loading: false,
       };
     case SINGLE_PRODUCT_REQUEST:
-      return { product: {}, loading: true };
+      return { ...state, product: {}, loading: true };
     case SINGLE_PRODUCT_SUCCESS:
       return {
         ...state,
