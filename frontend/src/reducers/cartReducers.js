@@ -27,8 +27,7 @@ export default (state = initialState, action) => {
     case CART_REMOVE_ITEM:
       return {
         ...state,
-        cart: 1,
-        loading: false,
+        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
     default:
       return state;

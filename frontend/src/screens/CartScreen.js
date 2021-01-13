@@ -10,7 +10,7 @@ import {
   Button,
   Card,
 } from 'react-bootstrap';
-import { addToCart } from '../actions/cartAction';
+import { addToCart, removeFromCart } from '../actions/cartAction';
 import PropTypes from 'prop-types';
 import Message from '../components/Message';
 
@@ -19,6 +19,7 @@ const CartScreen = ({
   location,
   history,
   addToCart,
+  removeFromCart,
   cart: { cartItems },
 }) => {
   const productId = match.params.id;
@@ -32,7 +33,8 @@ const CartScreen = ({
   }, [productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    console.log(1);
+    console.log(id);
+    removeFromCart(id);
   };
   const checkoutHandler = () => {
     history.push('/login?redirect=shipping');
@@ -123,10 +125,13 @@ const CartScreen = ({
 
 CartScreen.propType = {
   addToCart: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   cart: state.cart,
 });
 
-export default connect(mapStateToProps, { addToCart })(CartScreen);
+export default connect(mapStateToProps, { addToCart, removeFromCart })(
+  CartScreen
+);
