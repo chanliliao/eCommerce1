@@ -39,20 +39,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-// export const getSingleProduct = (id) => async (dispatch) => {
-//   try {
-//     dispatch({ type: SINGLE_PRODUCT_REQUEST });
-
-//     const { data } = await axios.get(`/api/products/${id}`);
-
-//     dispatch({ type: SINGLE_PRODUCT_SUCCESS, payload: data });
-//   } catch (error) {
-//     dispatch({
-//       type: SINGLE_PRODUCT_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
+export const logout = () => async (dispatch) => {
+  localStorage.removeItem('userInfo');
+  dispatch({ type: USER_LOGOUT });
+};

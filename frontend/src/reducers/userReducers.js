@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
         loading: false,
       };
     case USER_LOGOUT:
-      return { ...state, userInfo: {} };
+      return {};
     default:
       return state;
   }
