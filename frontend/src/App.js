@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 import store from './store';
 import { Provider } from 'react-redux';
 
@@ -21,6 +22,7 @@ const App = () => {
               <Route path='/product/:id' component={ProductScreen} />
               <Route path='/cart/:id?' component={CartScreen} exact />
               <Route path='/login' component={LoginScreen} exact />
+              <Route path='/register' component={RegisterScreen} exact />
               <Route path='/' component={HomeScreen} exact />
             </Container>
           </main>

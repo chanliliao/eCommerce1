@@ -9,24 +9,27 @@ import {
   Form,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../actions/productAction';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import PropTypes from 'prop-types';
 
-const ProductScreen = ({
-  match,
-  history,
-  getSingleProduct,
-  singleProduct: { product, error, loading },
-}) => {
+const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
 
+  const dispatch = useDispatch();
+  const productDetails = useSelector((state) => state.productDetails);
+
+  const { product, error, loading } = productDetails;
+
+  // const product = [];
+  // const loading = false;
+  // const error = false;
+
   useEffect(() => {
-    getSingleProduct(match.params.id);
-  }, [match]);
+    dispatch(getSingleProduct(match.params.id));
+  }, [dispatch, match]);
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -127,13 +130,4 @@ const ProductScreen = ({
   );
 };
 
-ProductScreen.propType = {
-  getSingleProduct: PropTypes.func.isRequired,
-  singleProduct: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  singleProduct: state.productList,
-});
-
-export default connect(mapStateToProps, { getSingleProduct })(ProductScreen);
+export default ProductScreen;

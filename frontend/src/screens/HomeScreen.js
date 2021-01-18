@@ -3,14 +3,19 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productAction';
 import PropTypes from 'prop-types';
 
-const HomeScreen = ({ listProducts, list: { products, loading, error } }) => {
+const HomeScreen = () => {
+  const dispatch = useDispatch();
+
+  const productList = useSelector((state) => state.productList);
+  const { products, loading, error } = productList;
+
   useEffect(() => {
-    listProducts();
-  }, []);
+    dispatch(listProducts());
+  }, [dispatch]);
 
   return (
     <Fragment>
@@ -32,14 +37,4 @@ const HomeScreen = ({ listProducts, list: { products, loading, error } }) => {
   );
 };
 
-HomeScreen.propType = {
-  listProducts: PropTypes.func.isRequired,
-
-  products: PropTypes.array.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  list: state.productList,
-});
-
-export default connect(mapStateToProps, { listProducts })(HomeScreen);
+export default HomeScreen;
