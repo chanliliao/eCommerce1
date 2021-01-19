@@ -5,7 +5,7 @@ import { userLoginReducers, userRegisterReducers } from './userReducers';
 
 export default combineReducers({
   productList: productListReducers,
-  productDetail: productDetailReducers,
+  productDetails: productDetailReducers,
   cart: cartReducers,
   userLogin: userLoginReducers,
   userRegister: userRegisterReducers,

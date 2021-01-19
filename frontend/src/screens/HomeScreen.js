@@ -5,7 +5,6 @@ import Message from '../components/Message';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productAction';
-import PropTypes from 'prop-types';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   Row,
@@ -11,30 +11,26 @@ import {
   Card,
 } from 'react-bootstrap';
 import { addToCart, removeFromCart } from '../actions/cartAction';
-import PropTypes from 'prop-types';
 import Message from '../components/Message';
 
-const CartScreen = ({
-  match,
-  location,
-  history,
-  addToCart,
-  removeFromCart,
-  cart: { cartItems },
-}) => {
+const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
   useEffect(() => {
     if (productId) {
-      addToCart(productId, qty);
+      dispatch(addToCart(productId, qty));
     }
-  }, [productId, qty]);
+  }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    console.log(id);
-    removeFromCart(id);
+    dispatch(removeFromCart(id));
   };
   const checkoutHandler = () => {
     history.push('/login?redirect=shipping');
@@ -118,20 +114,8 @@ const CartScreen = ({
           </ListGroup>
         </Card>
       </Col>
-      <Col md={2}></Col>
     </Row>
   );
 };
 
-CartScreen.propType = {
-  addToCart: PropTypes.func.isRequired,
-  removeFromCart: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  cart: state.cart,
-});
-
-export default connect(mapStateToProps, { addToCart, removeFromCart })(
-  CartScreen
-);
+export default CartScreen;
