@@ -62,7 +62,9 @@ const CartScreen = ({ match, location, history }) => {
                       style={{ width: 'unset' }}
                       value={item.qty}
                       onChange={(e) =>
-                        addToCart(item.product, Number(e.target.value))
+                        dispatch(
+                          addToCart(item.product, Number(e.target.value))
+                        )
                       }
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
