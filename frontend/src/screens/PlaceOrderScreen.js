@@ -18,7 +18,9 @@ const PlaceOrderScreen = ({ history }) => {
 
   cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 100;
   cart.taxPrice = Number((0.15 * cart.itemsPrice).toFixed(2));
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+  cart.totalPrice = Number(
+    (cart.itemsPrice + cart.shippingPrice + cart.taxPrice).toFixed(2)
+  );
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
@@ -107,7 +109,7 @@ const PlaceOrderScreen = ({ history }) => {
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
-              c
+
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
