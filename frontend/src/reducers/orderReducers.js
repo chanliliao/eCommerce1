@@ -100,6 +100,10 @@ export const orderListMyReducers = (state = { orders: [] }, action) => {
         loading: false,
         error: action.payload,
       };
+    case ORDER_LIST_MY_RESET:
+      return {
+        orders: [],
+      };
     default:
       return state;
   }

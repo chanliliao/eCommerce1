@@ -80,6 +80,10 @@ export const userDetailsReducers = (state = { user: {} }, action) => {
         error: action.payload,
         loading: false,
       };
+    case USER_DETAILS_RESET:
+      return {
+        user: {},
+      };
     default:
       return state;
   }
