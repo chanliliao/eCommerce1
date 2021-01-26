@@ -16,6 +16,7 @@ import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
 import store from './store';
 import { Provider } from 'react-redux';
+import UserEditScreen from './screens/UserEditScreen';
 
 const App = () => {
   return (
@@ -34,7 +35,12 @@ const App = () => {
               <Route path='/login' component={LoginScreen} exact />
               <Route path='/register' component={RegisterScreen} exact />
               <Route path='/profile' component={ProfileScreen} exact />
-              <Route path='/admin/userList' component={UserListScreen} exact />
+              <Route path='/admin/userlist' component={UserListScreen} exact />
+              <Route
+                path='/admin/user/:id/edit'
+                component={UserEditScreen}
+                exact
+              />
 
               <Route path='/' component={HomeScreen} exact />
             </Container>
