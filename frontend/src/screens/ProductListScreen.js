@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -32,9 +32,21 @@ const ProductListScreen = ({ history }) => {
     }
   };
 
+  const createProductHandler = (product) => {};
+
   return (
     <Fragment>
-      <h1>Products</h1>
+      <Row className='align-items-center'>
+        <Col>
+          <h1>Products</h1>
+        </Col>
+        <Col className='text-right'>
+          <Button className='my-3' onClick={createProductHandler}>
+            <i className='fas fa-plus'> CREATE PRODUCT</i>
+          </Button>
+        </Col>
+      </Row>
+
       {loading ? (
         <Loader />
       ) : error ? (
