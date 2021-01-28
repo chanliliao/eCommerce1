@@ -16,7 +16,11 @@ const ProductListScreen = ({ history }) => {
   const { userInfo } = userLogin;
 
   const productDelete = useSelector((state) => state.productDelete);
-  const { success: successDelete } = productDelete;
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -46,7 +50,8 @@ const ProductListScreen = ({ history }) => {
           </Button>
         </Col>
       </Row>
-
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
