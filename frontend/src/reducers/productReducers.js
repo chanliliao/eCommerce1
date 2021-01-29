@@ -107,3 +107,24 @@ export const productCreateReducers = (state = {}, action) => {
       return state;
   }
 };
+
+export const productUpdateReducers = (state = { product: {} }, action) => {
+  switch (action.type) {
+    case PRODUCT_UPDATE_REQUEST:
+      return { loading: true };
+    case PRODUCT_UPDATE_SUCCESS:
+      return {
+        success: true,
+        loading: false,
+      };
+    case PRODUCT_UPDATE_FAIL:
+      return {
+        error: action.payload,
+        loading: false,
+      };
+    case PRODUCT_UPDATE_RESET:
+      return { users: {} };
+    default:
+      return state;
+  }
+};

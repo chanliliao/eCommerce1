@@ -4,6 +4,7 @@ import {
   productDeleteReducers,
   productDetailReducers,
   productListReducers,
+  productUpdateReducers,
 } from './productReducers';
 import cartReducers from './cartReducers';
 import {
@@ -27,6 +28,7 @@ export default combineReducers({
   productDetails: productDetailReducers,
   productDelete: productDeleteReducers,
   productCreate: productCreateReducers,
+  productUpdate: productUpdateReducers,
   cart: cartReducers,
   userLogin: userLoginReducers,
   userRegister: userRegisterReducers,

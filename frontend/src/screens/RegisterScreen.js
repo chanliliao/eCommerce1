@@ -43,7 +43,7 @@ const RegisterScreen = ({ location, history }) => {
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group ControlId='name'>
+        <Form.Group controlId='name'>
           <Form.Label>Name</Form.Label>
           <Form.Control
             type='name'
@@ -53,7 +53,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group ControlId='email'>
+        <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type='email'
@@ -63,7 +63,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group ControlId='password'>
+        <Form.Group controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
@@ -73,7 +73,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group ControlId='comfrimPassword'>
+        <Form.Group controlId='comfrimPassword'>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type='password'
