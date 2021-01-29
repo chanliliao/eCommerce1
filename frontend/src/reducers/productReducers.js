@@ -85,3 +85,25 @@ export const productDeleteReducers = (state = {}, action) => {
       return state;
   }
 };
+
+export const productCreateReducers = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_CREATE_REQUEST:
+      return { loading: true };
+    case PRODUCT_CREATE_SUCCESS:
+      return {
+        product: action.payload,
+        success: true,
+        loading: false,
+      };
+    case PRODUCT_CREATE_FAIL:
+      return {
+        error: action.payload,
+        loading: false,
+      };
+    case PRODUCT_CREATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
