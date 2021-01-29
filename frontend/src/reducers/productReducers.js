@@ -123,7 +123,7 @@ export const productUpdateReducers = (state = { product: {} }, action) => {
         loading: false,
       };
     case PRODUCT_UPDATE_RESET:
-      return { users: {} };
+      return { product: {} };
     default:
       return state;
   }
