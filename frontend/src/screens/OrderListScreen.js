@@ -4,62 +4,24 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import {
-  listProducts,
-  deleteProduct,
-  createProduct,
-} from '../actions/productAction';
-import { PRODUCT_CREATE_RESET } from '../constants/productTypes';
+import { listOrders } from '../actions/orderAction';
 
 const OrderListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const orderList = useSelector((state) => state.orderList);
+  const { loading, error, orders } = orderList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const productDelete = useSelector((state) => state.productDelete);
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = productDelete;
-
-  const productCreate = useSelector((state) => state.productCreate);
-  const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
-    product: createdProduct,
-  } = productCreate;
-
   useEffect(() => {
-    dispatch({ type: PRODUCT_CREATE_RESET });
-    if (!userInfo || !userInfo.isAdmin) {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders());
+    } else {
       history.push(`/login`);
     }
-
-    if (successCreate) {
-      history.push(`/admin/product/${createdProduct._id}/edit`);
-    } else {
-      dispatch(listProducts());
-    }
-  }, [
-    dispatch,
-    history,
-    successDelete,
-    successCreate,
-    createdProduct,
-    userInfo,
-  ]);
-
-  const deleteHandler = (id) => {
-    if (window.confirm('are you sure')) {
-      dispatch(deleteProduct(id));
-    }
-  };
+  }, [dispatch, history, userInfo]);
 
   return (
     <Fragment>
@@ -68,10 +30,6 @@ const OrderListScreen = ({ history }) => {
           <h1>Orders</h1>
         </Col>
       </Row>
-      {loadingDelete && <Loader />}
-      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-      {loadingCreate && <Loader />}
-      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -90,26 +48,37 @@ const OrderListScreen = ({ history }) => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>${product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
+            {orders.map((order) => (
+              <tr key={order._id}>
+                <td>{order._id}</td>
+                <td>{order.user && order.user.name}</td>
+                <td>{order.createdAt.substring(0, 10)}</td>
                 <td>
-                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                  $
+                  {order.totalPrice
+                    .toFixed(2)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </td>
+                <td>
+                  {order.isPaid ? (
+                    order.paidAt.substring(0, 10)
+                  ) : (
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                  )}
+                </td>
+                <td>
+                  {order.isDelivered ? (
+                    order.deliveredAt.substring(0, 10)
+                  ) : (
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                  )}
+                </td>
+                <td>
+                  <LinkContainer to={`/order/${order._id}`}>
                     <Button variant='light' className='btn-sm'>
-                      <i className='fas fa-edit'></i>
+                      DETAILS
                     </Button>
                   </LinkContainer>
-                  <Button
-                    variant='danger'
-                    className='btn-sm'
-                    onClick={() => deleteHandler(product._id)}
-                  >
-                    <i className='fas fa-trash'></i>
-                  </Button>
                 </td>
               </tr>
             ))}
