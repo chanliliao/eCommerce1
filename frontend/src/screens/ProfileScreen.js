@@ -33,6 +33,7 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push('/login');
     } else {
+      dispatch(listMyOrders());
       if (!user.name) {
         dispatch(getUserDetails('profile'));
         dispatch(listMyOrders());
@@ -145,7 +146,7 @@ const ProfileScreen = ({ location, history }) => {
                     )}
                   </td>
                   <td>
-                    <LinkContainer to={`/orders/${order._id}`}>
+                    <LinkContainer to={`/order/${order._id}`}>
                       <Button className='btn-sm' variant='light'>
                         Details
                       </Button>

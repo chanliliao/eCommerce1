@@ -33,24 +33,31 @@ const ProductEditScreen = ({ match, history }) => {
     success: successUpdate,
   } = productUpdate;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
-    if (successUpdate) {
-      dispatch({ type: PRODUCT_UPDATE_RESET });
-      history.push('/admin/productlist');
-    } else {
-      if (!product.name || product._id !== productId) {
-        dispatch(getSingleProduct(productId));
+    if (userInfo && userInfo.isAdmin) {
+      if (successUpdate) {
+        dispatch({ type: PRODUCT_UPDATE_RESET });
+        history.push('/admin/productlist');
       } else {
-        setName(product.name);
-        setPrice(product.price);
-        setImage(product.image);
-        setBrand(product.brand);
-        setCountInStock(product.countInStock);
-        setCategory(product.category);
-        setDescription(product.description);
+        if (!product.name || product._id !== productId) {
+          dispatch(getSingleProduct(productId));
+        } else {
+          setName(product.name);
+          setPrice(product.price);
+          setImage(product.image);
+          setBrand(product.brand);
+          setCountInStock(product.countInStock);
+          setCategory(product.category);
+          setDescription(product.description);
+        }
       }
+    } else {
+      history.push(`/login`);
     }
-  }, [dispatch, productId, product, successUpdate, history]);
+  }, [dispatch, productId, product, successUpdate, history, userInfo]);
 
   const uploadFileHander = async (e) => {
     const file = e.target.files[0];
