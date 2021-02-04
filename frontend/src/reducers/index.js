@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   productCreateReducers,
+  productCreateReviewReducers,
   productDeleteReducers,
   productDetailReducers,
   productListReducers,
@@ -31,6 +32,7 @@ export default combineReducers({
   productDelete: productDeleteReducers,
   productCreate: productCreateReducers,
   productUpdate: productUpdateReducers,
+  productReviewCreate: productCreateReviewReducers,
   cart: cartReducers,
   userLogin: userLoginReducers,
   userRegister: userRegisterReducers,

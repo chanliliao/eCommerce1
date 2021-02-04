@@ -128,3 +128,24 @@ export const productUpdateReducers = (state = { product: {} }, action) => {
       return state;
   }
 };
+
+export const productCreateReviewReducers = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_CREATE_REVIEW_REQUEST:
+      return { loading: true };
+    case PRODUCT_CREATE_REVIEW_SUCCESS:
+      return {
+        success: true,
+        loading: false,
+      };
+    case PRODUCT_CREATE_REVIEW_FAIL:
+      return {
+        error: action.payload,
+        loading: false,
+      };
+    case PRODUCT_CREATE_REVIEW_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
