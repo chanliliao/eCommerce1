@@ -5,7 +5,17 @@ import asyncHandler from 'express-async-handler';
 //@route  GET /api/products
 //@access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
+  // this is how to get the question mark
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
+
+  const products = await Product.find({ ...keyword });
 
   res.json(products);
 });
